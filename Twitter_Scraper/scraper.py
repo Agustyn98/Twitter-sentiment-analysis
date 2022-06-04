@@ -4,7 +4,7 @@ import csv
 import os
 from google.cloud import storage
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
 
 def create_csv(tweets):
     # file = '/tmp/tweets' + str(int(time.time())) + '.csv'
@@ -28,7 +28,7 @@ def create_csv(tweets):
 
 def save_to_bucket(filename: str):
     storage_client = storage.Client()
-    bucket_name = "tweets_datalake1"
+    bucket_name = "tweets_datalake"
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(filename[5:])  # Destination: tweets_datalake/filename
     blob.upload_from_filename(filename)
@@ -45,7 +45,7 @@ def main():
     tweets = []
 
     for topic in topics:
-        query = f"{topic} -has:links -is:retweet -has:media lang:es"
+        query = f"{topic} -has:links -is:retweet -is:reply -has:media lang:es"
         tweet = api.search_recent_tweets(query=query, max_results=100)
         tweets.append((topic, tweet))
 

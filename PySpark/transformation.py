@@ -5,7 +5,7 @@ from google.cloud import language_v1
 
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
 
 def analize_text(text):
     client = language_v1.LanguageServiceClient()
@@ -33,7 +33,7 @@ def get_sentyment(text):
 def main():
     sentyment_udf = udf(get_sentyment, ArrayType(FloatType()))
 
-    csv_file = "gs://tweets_datalake1/tweets.csv"
+    csv_file = "gs://tweets_datalake/tweets.csv"
     #csv_file = "/tmp/tweets.csv"
 
     data = (
@@ -63,7 +63,7 @@ def main():
     print("END RESULTS")
 
     data.write.format("bigquery").option(
-        "temporaryGcsBucket", "tweets_datalake1"
+        "temporaryGcsBucket", "tweets_datalake"
     ).option("table", "twitter.tweets").mode("append").save()
 
 

@@ -10,7 +10,7 @@ from airflow.providers.google.cloud.operators.dataproc import (
 )
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
 
 YESTERDAY = datetime.datetime.now() - datetime.timedelta(days=1)
 
@@ -20,7 +20,7 @@ default_args = {
     "email": [""],
     "email_on_failure": False,
     "email_on_retry": False,
-    "retries": 1,
+    "retries": 0,
     "retry_delay": datetime.timedelta(minutes=20),
     "start_date": YESTERDAY,
 }
@@ -69,7 +69,7 @@ with models.DAG(
         cluster_name="sentyment-analysis-cluster",
         region="us-central1",
         task_id="submit_job",
-        main="gs://tweets_datalake1/transformation.py",
+        main="gs://tweets_datalake/transformation.py",
     )
 
     create_csv_operator >> create_cluster_operator >> submit_job_operator
