@@ -10,8 +10,6 @@ from airflow.providers.google.cloud.operators.dataproc import (
 )
 
 
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
-
 YESTERDAY = datetime.datetime.now() - datetime.timedelta(days=1)
 
 default_args = {
@@ -20,7 +18,7 @@ default_args = {
     "email": [""],
     "email_on_failure": False,
     "email_on_retry": False,
-    "retries": 0,
+    "retries": 1,
     "retry_delay": datetime.timedelta(minutes=20),
     "start_date": YESTERDAY,
 }
@@ -29,7 +27,7 @@ with models.DAG(
     "sentyment_analysis_pipeline",
     catchup=False,
     default_args=default_args,
-    schedule_interval=datetime.timedelta(hours=24),
+    schedule_interval=datetime.timedelta(hours=8),
 ) as dag:
 
     create_csv_operator = python.PythonOperator(task_id="scrap", python_callable=scrap_call)
