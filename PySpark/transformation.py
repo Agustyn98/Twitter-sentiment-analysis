@@ -24,7 +24,6 @@ spark = SparkSession.builder.appName("sentyment analysis").getOrCreate()
 
 def get_sentyment(text):
     score, magnitude = analize_text(text)
-    #score, magnitude = (-0.1, 0.5)
     return [score, magnitude]
 
 
@@ -32,7 +31,6 @@ def main():
     sentyment_udf = udf(get_sentyment, ArrayType(FloatType()))
 
     csv_file = "gs://tweets_datalake/tweets.csv"
-    #csv_file = "/tmp/tweets.csv"
 
     data = (
         spark.read.option("multiline", True)
