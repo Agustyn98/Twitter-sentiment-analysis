@@ -27,7 +27,7 @@ def save_to_bucket(filename: str):
     storage_client = storage.Client()
     bucket_name = "tweets_datalake"
     bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(filename[5:])  # Destination: tweets_datalake/filename
+    blob = bucket.blob(filename[5:]) 
     blob.upload_from_filename(filename)
     print(f"File {filename} uploaded")
 
