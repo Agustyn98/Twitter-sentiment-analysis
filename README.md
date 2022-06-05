@@ -18,9 +18,10 @@ This is a research project with the goal of creating sentiment metrics on the mo
 
 ## Results
 
-[Sentiment.pdf](https://github.com/Agustyn98/Twittter-sentiment-analysis/files/8840159/Sentiment.pdf)
+![Sentiment_2022-06-05_11-39-51](https://user-images.githubusercontent.com/66125885/172055967-6d505416-a747-4bb6-a435-5fad174e6ef8.png)
 
-- Link:
+
+- Live dashboard:
 
 https://datastudio.google.com/reporting/c5152ebf-3502-44e9-a5a9-3df15d36ea43
 
