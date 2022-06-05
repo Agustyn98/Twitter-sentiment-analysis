@@ -6,6 +6,8 @@ This is a research project with the goal of creating sentiment metrics on the mo
 
 ## Architecture
 
+![diagram_png](https://user-images.githubusercontent.com/66125885/172054167-ba6eb893-6149-4c08-994a-f72d0e7ff68b.png)
+
 
 1. Data Extraction is done using python’s tweepy module on Twitter’s API
 
@@ -15,6 +17,12 @@ This is a research project with the goal of creating sentiment metrics on the mo
 
 
 ## Results
+
+[Sentiment.pdf](https://github.com/Agustyn98/Twittter-sentiment-analysis/files/8840159/Sentiment.pdf)
+
+- Link:
+
+https://datastudio.google.com/reporting/c5152ebf-3502-44e9-a5a9-3df15d36ea43
 
 ## Setup instructions
 Requirements:
