@@ -5,7 +5,6 @@ import os
 from google.cloud import storage
 
 def create_csv(tweets):
-    # file = '/tmp/tweets' + str(int(time.time())) + '.csv'
     file = "/tmp/tweets.csv"
     with open(file, "w", encoding="UTF8") as f:
         header = ["name", "id", "text", "date"]
@@ -35,7 +34,7 @@ def save_to_bucket(filename: str):
 
 def main():
 
-    bearer_token = "AAAAAAAAAAAAAAAAAAAAAGTFcgEAAAAAknYDJ8%2B6zKprh5SFSJzzOOSbqw0%3D7cIN1aoZjikyeX4T1NsY3uJpIqWOFPvPSB0OioZm2n9DE3JnhO"
+    bearer_token = ""
 
     api = tweepy.Client(bearer_token=bearer_token)
 

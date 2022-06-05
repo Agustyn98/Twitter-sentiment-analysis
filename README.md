@@ -28,10 +28,12 @@ https://datastudio.google.com/reporting/c5152ebf-3502-44e9-a5a9-3df15d36ea43
 ## Setup instructions
 Requirements:
 - Terraform
-- A GCP account
-- A service account key with owner permissions
+- Twitter API bearer token
+- A GCP service account key with owner permissions
 
-1. Setup the cloud resources
+1. Edit your bearer token on `scraper.py`
+
+2. Setup the cloud resources
 
 ```
 terraform init
@@ -42,7 +44,7 @@ terraform apply
 
 Initializing Composer will take around 20 minutes.
 
-2. Upload the `scraper.py` script and `airflow_dag.py` to the Composer's instance DAGs folder in cloud storage
+3. Upload the `scraper.py` script and `airflow_dag.py` to the Composer's instance DAGs folder in cloud storage
 
 
 
