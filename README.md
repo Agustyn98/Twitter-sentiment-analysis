@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a research project with the goal of creating sentiment metrics on the most influential political figures in Argentina. I built an ETL pipeline on the Google Cloud platform that retrieves hundreds of tweets from Twitter's API on a daily basis, and then performed sentiment analysis using Google's natural language API.
+This is a research project with the goal of creating sentiment metrics on the most influential political figures in Argentina. I built an ETL pipeline on the Google Cloud platform that retrieves hundreds of tweets from Twitter's API on a daily basis, and then performs sentiment analysis using Google's natural language API.
 
 ## Architecture
 
