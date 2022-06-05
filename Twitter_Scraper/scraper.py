@@ -4,8 +4,6 @@ import csv
 import os
 from google.cloud import storage
 
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
-
 def create_csv(tweets):
     # file = '/tmp/tweets' + str(int(time.time())) + '.csv'
     file = "/tmp/tweets.csv"

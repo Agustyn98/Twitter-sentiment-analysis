@@ -5,8 +5,6 @@ from google.cloud import language_v1
 
 import os
 
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/agus/programas/sentyment_analysys_project/avid-streamer-351318-ddadcd004872.json"
-
 def analize_text(text):
     client = language_v1.LanguageServiceClient()
 
