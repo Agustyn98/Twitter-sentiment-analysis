@@ -4,6 +4,7 @@ from pyspark.sql.types import ArrayType, FloatType
 from google.cloud import language_v1
 
 import os
+import sys
 
 def analize_text(text):
     client = language_v1.LanguageServiceClient()
@@ -60,7 +61,7 @@ def main():
 
     data.write.format("bigquery").option(
         "temporaryGcsBucket", "tweets_datalake"
-    ).option("table", "twitter_datawarehouse.tweets").mode("append").save()
+    ).option("table", "tweets_datawarehouse.tweets").mode("append").save()
 
 
 if __name__ == "__main__":
