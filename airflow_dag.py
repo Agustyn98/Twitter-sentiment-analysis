@@ -35,7 +35,7 @@ with models.DAG(
     "sentyment_analysis_pipeline",
     catchup=False,
     default_args=default_args,
-    schedule_interval=datetime.timedelta(hours=10),
+    schedule_interval=datetime.timedelta(hours=8),
 ) as dag:
 
 
