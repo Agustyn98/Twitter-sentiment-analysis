@@ -21,7 +21,6 @@ def analize_text(text):
 
 spark = SparkSession.builder.appName("sentyment analysis").getOrCreate()
 
-
 def get_sentyment(text):
     score, magnitude = analize_text(text)
     return [score, magnitude]
@@ -30,7 +29,8 @@ def get_sentyment(text):
 def main():
     sentyment_udf = udf(get_sentyment, ArrayType(FloatType()))
 
-    csv_file = "gs://tweets_datalake/tweets.csv"
+    filename = (sys.argv[1])
+    csv_file = "gs://tweets_datalake/" + filename[5:]
 
     data = (
         spark.read.option("multiline", True)
@@ -60,7 +60,7 @@ def main():
 
     data.write.format("bigquery").option(
         "temporaryGcsBucket", "tweets_datalake"
-    ).option("table", "twitter.tweets").mode("append").save()
+    ).option("table", "twitter_datawarehouse.tweets").mode("append").save()
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ resource "google_storage_bucket_object" "upload_transformation" {
 
 
 resource "google_bigquery_dataset" "default_dataset" {
-  dataset_id                  = "twitter"
+  dataset_id                  = "tweets_datawarehouse"
   location                    = "US-CENTRAL1"
 }
 

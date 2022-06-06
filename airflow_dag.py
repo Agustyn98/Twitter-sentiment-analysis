@@ -1,6 +1,9 @@
 import datetime
+from fileinput import filename
 import os
+import time
 from airflow import models
+from airflow.models import Variable
 from airflow.operators import python
 from scraper import main as scrap_call
 from airflow.providers.google.cloud.operators.dataproc import (
@@ -18,19 +21,29 @@ default_args = {
     "email": [""],
     "email_on_failure": False,
     "email_on_retry": False,
-    "retries": 1,
+    "retries": 0,
     "retry_delay": datetime.timedelta(minutes=20),
     "start_date": YESTERDAY,
 }
+
+
+def set_timestamp_variable():
+    Variable.set("filename", '/tmp/tweets-' + str(int(time.time())) + '.csv')
+
 
 with models.DAG(
     "sentyment_analysis_pipeline",
     catchup=False,
     default_args=default_args,
-    schedule_interval=datetime.timedelta(hours=8),
+    schedule_interval=datetime.timedelta(hours=10),
 ) as dag:
 
-    create_csv_operator = python.PythonOperator(task_id="scrap", python_callable=scrap_call)
+
+    set_timestamp = python.PythonOperator(task_id="timestamp", python_callable=set_timestamp_variable)
+
+    filename = Variable.get('filename', default_var=0)
+
+    create_csv_operator = python.PythonOperator(task_id="scrap", python_callable=scrap_call, op_args=[filename])
 
     path_pip = (
         "gs://goog-dataproc-initialization-actions-us-central1/python/pip-install.sh"
@@ -38,6 +51,7 @@ with models.DAG(
     path_bigquery = (
         "gs://goog-dataproc-initialization-actions-us-central1/connectors/connectors.sh"
     )
+
 
     CLUSTER_GENERATOR_CONFIG = ClusterGenerator(
         idle_delete_ttl=300,
@@ -55,6 +69,7 @@ with models.DAG(
         },
     ).make()
 
+
     create_cluster_operator = DataprocCreateClusterOperator(
         task_id="create_dataproc_cluster",
         cluster_name="sentyment-analysis-cluster",
@@ -63,12 +78,14 @@ with models.DAG(
         cluster_config=CLUSTER_GENERATOR_CONFIG,
     )
 
+
     submit_job_operator = DataprocSubmitPySparkJobOperator(
         cluster_name="sentyment-analysis-cluster",
         region="us-central1",
         task_id="submit_job",
+        arguments=[filename],
         main="gs://tweets_datalake/transformation.py",
     )
 
-    create_csv_operator >> create_cluster_operator >> submit_job_operator
+    set_timestamp >> create_csv_operator >> create_cluster_operator >> submit_job_operator
 

@@ -4,8 +4,8 @@ import csv
 import os
 from google.cloud import storage
 
-def create_csv(tweets):
-    file = "/tmp/tweets.csv"
+def create_csv(tweets, filename):
+    file = filename 
     with open(file, "w", encoding="UTF8") as f:
         header = ["name", "id", "text", "date"]
         today = str(date.today())
@@ -27,14 +27,14 @@ def save_to_bucket(filename: str):
     storage_client = storage.Client()
     bucket_name = "tweets_datalake"
     bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(filename[5:]) 
+    blob = bucket.blob(filename[5:])  # Destination: tweets_datalake/filename
     blob.upload_from_filename(filename)
     print(f"File {filename} uploaded")
 
 
-def main():
+def main(filename):
 
-    bearer_token = ""
+    bearer_token = "AAAAAAAAAAAAAAAAAAAAAGTFcgEAAAAAknYDJ8%2B6zKprh5SFSJzzOOSbqw0%3D7cIN1aoZjikyeX4T1NsY3uJpIqWOFPvPSB0OioZm2n9DE3JnhO"
 
     api = tweepy.Client(bearer_token=bearer_token)
 
@@ -43,10 +43,11 @@ def main():
 
     for topic in topics:
         query = f"{topic} -has:links -is:retweet -is:reply -has:media lang:es"
-        tweet = api.search_recent_tweets(query=query, max_results=100)
+        tweet = api.search_recent_tweets(query=query, max_results=10)
+        print(tweet)
         tweets.append((topic, tweet))
 
-    filename = create_csv(tweets)
+    create_csv(tweets, filename)
 
     if filename is not None:
         save_to_bucket(filename)
@@ -57,3 +58,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
