@@ -9,11 +9,11 @@ This is a research project with the goal of creating sentiment metrics on the mo
 ![diagram_png](https://user-images.githubusercontent.com/66125885/172054167-ba6eb893-6149-4c08-994a-f72d0e7ff68b.png)
 
 
-1. Data Extraction is done using python’s tweepy module on Twitter’s API
+1. Data Extraction is done in airflow using python’s tweepy module on Twitter’s API
 
-2. Transformation: Data is cleaned and each tweet is mapped to the Natural Language API in PySpark with Dataproc
+2. Transformation: Extracted data is cleaned and each tweet is mapped to the Natural Language API in PySpark with Dataproc
 
-3. Data is stored in BigQuery, and plotted in Data Studio through its connector
+3. Data warehouse: Data is stored in BigQuery, and plotted in Data Studio through its connector
 
 
 ## Results
