@@ -2,7 +2,14 @@
 
 ## Description
 
-This is a research project with the goal of creating sentiment metrics on the most influential political figures in Argentina, Javier Milei, Alberto Fernandez and Larreta. I built an ETL pipeline on the Google Cloud platform that retrieves hundreds of tweets that mention the people of intereset from Twitter's API on a daily basis, and then performs sentiment analysis using Google's natural language API.
+This is a research project with the goal of creating sentiment metrics on the most influential political figures in Argentina. I built an ETL pipeline on the Google Cloud platform that retrieves hundreds of tweets that mention the people of intereset from Twitter's API on a daily basis, and then performs sentiment analysis using Google's natural language API.
+
+The politicians used for this project are:
+
+- Javier Milei: Libertarian, deputy for Buenos Aires
+- Larreta: Center-right, mayor of Buenos Aires
+- Alberto Fernandez: Center-left, President
+
 
 ## Architecture
 
@@ -20,15 +27,15 @@ This is a research project with the goal of creating sentiment metrics on the mo
 
 After collecting samples for a month, I found that:
 
-For Javier Milei, there was a clear negative shift starting from june 10, right after some controversial statements made by him which caused his party to break up.
+For Javier Milei, there was a clear negative shift starting from june 10, right after some controversial statements made by him about gun laws and organ trade, which caused his party to break up.
 
-For the other two politicians, overall, I found that the sentiment was slightly negative overall.
-
-
-![Sentiment_2022-06-05_11-39-51](https://user-images.githubusercontent.com/66125885/172055967-6d505416-a747-4bb6-a435-5fad174e6ef8.png)
+For the other politicians, I found that the sentiment was mixed, with a slightly negative tendency for both of them.
 
 
 - Live dashboard:
+
+https://datastudio.google.com/reporting/c3898edd-aeab-4872-b64c-00e253958318/page/Ys5xC
+
 
 ![Screenshot_2022-07-18_16-31-46](https://user-images.githubusercontent.com/66125885/179602644-1dc18428-21ec-4ee8-b512-809524f4de41.png)
 
